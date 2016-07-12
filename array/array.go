@@ -7,7 +7,7 @@ type A int
 type Array []A
 
 /*
-Some
+Some tests whether some element in the array passes the test implemented by the provided function
 */
 func (array Array) Some(f func(A, int, Array) bool) bool {
 	for index, value := range array {
