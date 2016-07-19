@@ -2,9 +2,26 @@ package array
 
 import (
 	"testing"
+	"sort"
 
 	"github.com/RainInFall/assert"
 )
+
+func TestSort(t *testing.T) {
+	assert.Init(t)
+
+	func() {
+		array := make(Array, 0, 10)
+
+		assert.Ok(sort.IsSorted(array.Sort()))
+	}()
+
+	func() {
+		array := Array{1, 5, 9, 8, 7, 6, 2, 4, 3}
+
+		assert.Ok(sort.IsSorted(array.Sort()))
+	}()
+}
 
 func TestSome(t *testing.T) {
 	assert.Init(t)
