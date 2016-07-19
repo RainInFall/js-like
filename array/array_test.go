@@ -45,6 +45,18 @@ func TestEquals(t *testing.T) {
 		assert.Ok(!array0.Equals(array1))
 		assert.Ok(!array1.Equals(array0))
 	}()
+
+	func() {
+		array0 := Array{0, 2, 4}
+		array1 := Array{0, 2}
+
+		assert.Ok(!array0.Equals(array1))
+		assert.Ok(!array1.Equals(array0))
+
+		array1 = append(array1, 4)
+		assert.Ok(array0.Equals(array1))
+		assert.Ok(array1.Equals(array0))
+	}()
 }
 
 func TestRevese(t *testing.T) {
