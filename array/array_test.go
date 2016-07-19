@@ -1,8 +1,8 @@
 package array
 
 import (
-	"testing"
 	"sort"
+	"testing"
 
 	"github.com/RainInFall/assert"
 )
@@ -20,6 +20,39 @@ func TestSort(t *testing.T) {
 		array := Array{1, 5, 9, 8, 7, 6, 2, 4, 3}
 
 		assert.Ok(sort.IsSorted(array.Sort()))
+	}()
+}
+
+func TestEquals(t *testing.T) {
+	assert.Init(t)
+
+	func() {
+		array0 := Array{}
+		array1 := Array{}
+
+		assert.Ok(array0.Equals(array1))
+		assert.Ok(array1.Equals(array0))
+	}()
+
+	func() {
+		array0 := Array{0, 2, 4}
+		array1 := Array{0, 2, 4}
+
+		assert.Ok(array0.Equals(array1))
+		assert.Ok(array1.Equals(array0))
+
+		array0[0] = 1
+		assert.Ok(!array0.Equals(array1))
+		assert.Ok(!array1.Equals(array0))
+	}()
+}
+
+func TestRevese(t *testing.T) {
+	assert.Init(t)
+
+	func() {
+		array := Array{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+		assert.Ok(array.Reverse().Equals(Array{10, 9, 8, 7, 6, 5, 4, 3, 2, 1}))
 	}()
 }
 
