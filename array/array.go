@@ -15,15 +15,15 @@ func (array Array) Len() int {
 	return len(array)
 }
 
-func (array Array) Less(i,j int) bool {
+func (array Array) Less(i, j int) bool {
 	return array[i] < array[j]
 }
 
-func (array Array) Swap(i,j int) {
-	array[i],array[j] = array[j], array[i]
+func (array Array) Swap(i, j int) {
+	array[i], array[j] = array[j], array[i]
 }
-/********Self defination End*******************/
 
+/********Self defination End*******************/
 
 /*
 Some tests whether some element in the array passes the test implemented by the provided function
@@ -42,7 +42,7 @@ Reverse the Array
 */
 func (array Array) Reverse() Array {
 	mid := len(array) / 2
-	for i, j := 0, len(array); i < mid; i, j = i+1, j-1 {
+	for i, j := 0, len(array)-1; i < mid; i, j = i+1, j-1 {
 		array[i], array[j] = array[j], array[i]
 	}
 	return array
@@ -58,7 +58,7 @@ func (array Array) Sort() Array {
 
 /*
 Equals compare two array with !=
- */
+*/
 func (array Array) Equals(other Array) bool {
 	if len(other) != len(array) {
 		return false
