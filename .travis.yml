@@ -16,7 +16,7 @@ script:
   - go test -v -covermode=count -coverprofile=array.out ./array
   - go test -v -covermode=count -coverprofile=object.out ./object
 after_script:
-  - echo 'mode: count' > cover.out
-  - sed "1d" *.out >> cover.out
+  - mv array.out cover.out
+  - sed "1d" object.out >> cover.out
   - cat cover.out
   - $HOME/gopath/bin/goveralls -coverprofile=cover.out -service=travis-ci -repotoken $COVERALLS_TOKEN
