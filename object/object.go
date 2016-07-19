@@ -12,7 +12,7 @@ type Object map[First]Second
 /*
 Keys return array of keys of the Obecjt
 */
-func Keys(obj Object) FirstArray {
+func (obj Object) Keys() FirstArray {
 	keys := make([]int, 0, len(obj))
 	for key := range obj {
 		keys = append(keys, int(key))
