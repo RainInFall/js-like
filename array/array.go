@@ -19,6 +19,10 @@ func (array Array) Less(i, j int) bool {
 	return array[i] < array[j]
 }
 
+func (array Array) LessOther(other Array, i, j int) bool {
+	return array[i] < other[j]
+}
+
 func (array Array) Swap(i, j int) {
 	array[i], array[j] = array[j], array[i]
 }
@@ -63,8 +67,8 @@ func (array Array) Equals(other Array) bool {
 	if len(other) != len(array) {
 		return false
 	}
-	for i, v := range array {
-		if v != other[i] {
+	for i := range array {
+		if array.LessOther(other, i, i) || other.LessOther(array, i, i) {
 			return false
 		}
 	}
