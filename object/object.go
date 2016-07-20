@@ -15,10 +15,6 @@ func (obj Object) Less(i, j First) bool {
 	return obj[i] < obj[j]
 }
 
-func (obj Object) LessOther(other Object, i, j First) bool {
-	return obj[i] < other[j]
-}
-
 /********Self defination End*******************/
 
 /*
@@ -30,19 +26,4 @@ func (obj Object) Keys() FirstArray {
 		keys = append(keys, key)
 	}
 	return FirstArray(keys)
-}
-
-/*
-Equals return true if all keys and values equal
-*/
-func (obj Object) Equals(other Object) bool {
-	if len(obj) != len(other) {
-		return false
-	}
-	for k := range obj {
-		if obj.LessOther(other, k, k) || other.LessOther(obj, k, k) {
-			return false
-		}
-	}
-	return true
 }
