@@ -1,3 +1,2 @@
 *.test
-gotemplate_*.go
 *.out
