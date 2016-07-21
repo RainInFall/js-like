@@ -6,7 +6,7 @@ import (
 	"github.com/RainInFall/assert"
 )
 
-//go:generate js-like array *Int
+//go:generate $GOPATH/bin/js-like array *Int
 
 type Int struct {
 	Value int
