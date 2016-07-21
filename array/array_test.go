@@ -8,6 +8,18 @@ import (
 	"github.com/RainInFall/assert"
 )
 
+func (array Array) Len() int {
+	return len(array)
+}
+
+func (array Array) Less(i, j int) bool {
+	return false
+}
+
+func (array Array) Swap(i, j int) {
+	array[i], array[j] = array[j], array[i]
+}
+
 func TestSort(t *testing.T) {
 	assert.Init(t)
 

@@ -10,21 +10,6 @@ type A int
 //Array has js-like functions
 type Array []A
 
-/********Self defination Begin*******************/
-func (array Array) Len() int {
-	return len(array)
-}
-
-func (array Array) Less(i, j int) bool {
-	return array[i] < array[j]
-}
-
-func (array Array) Swap(i, j int) {
-	array[i], array[j] = array[j], array[i]
-}
-
-/********Self defination End*******************/
-
 /*
 Some tests whether some element in the array passes the test implemented by the provided function
 */

@@ -7,6 +7,7 @@ import (
 	"os"
 	"os/exec"
 	"path"
+	"strings"
 )
 
 func usage() {
@@ -47,8 +48,12 @@ func main() {
 				log.Fatal("Syntax: array type")
 				os.Exit(2)
 			}
-			typ := args[0]
-			if err := gotemplate("github.com/RainInFall/js-like/array", fmt.Sprintf("Array%s(%s)", typ, typ)); nil != err {
+			typeOrigin := args[0]
+			typeName := typeOrigin
+			if '*' == typeName[0] {
+				typeName = strings.Replace(typeName, "*", "p", 1)
+			}
+			if err := gotemplate("github.com/RainInFall/js-like/array", fmt.Sprintf("Array%s(%s)", typeName, typeOrigin)); nil != err {
 				os.Exit(3)
 			}
 		}
