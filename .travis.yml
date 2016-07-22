@@ -22,4 +22,4 @@ after_script:
   - mv test.out cover.out
   - sed "1d" object.out >> cover.out
   - sed "1d" array.out >> cover.out
-  - $HOME/gopath/bin/goveralls -ignore=gotemplate_*.go -coverprofile=cover.out -service=travis-ci -repotoken $COVERALLS_TOKEN
+  - $HOME/gopath/bin/goveralls -ignore=gotemplate_*.go,test/* -coverprofile=cover.out -service=travis-ci -repotoken $COVERALLS_TOKEN
