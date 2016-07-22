@@ -1,4 +1,4 @@
-package main
+package test
 
 type Int struct {
 	Value int

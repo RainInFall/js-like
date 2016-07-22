@@ -11,13 +11,14 @@ install:
   - go get github.com/RainInFall/js-like
 
 before_script:
-  - go generate
+  - go generate ./test
 
 script: 
-  - go test -v -covermode=count -coverprofile=cover.out
+  - go test -v -covermode=count -coverprofile=test.out ./test
   - go test -v -covermode=count -coverprofile=array.out ./array
   - go test -v -covermode=count -coverprofile=object.out ./object
 after_script:
+  - mv test.out cover.out
   - sed "1d" object.out >> cover.out
   - sed "1d" array.out >> cover.out
   - $HOME/gopath/bin/goveralls -ignore=gotemplate_*.go -coverprofile=cover.out -service=travis-ci -repotoken $COVERALLS_TOKEN
