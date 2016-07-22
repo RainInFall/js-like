@@ -53,3 +53,14 @@ func (array Array) Filter(callback func(val A, index int, array Array) bool) Arr
 	}
 	return newArray
 }
+
+/*
+Map creates a new array with the results of calling a provided function on every element in this array.
+*/
+func (array Array) Map(callback func(val A, index int, array Array) A) Array {
+	newArray := make(Array, len(array))
+	for index, val := range array {
+		newArray[index] = callback(val, index, array)
+	}
+	return newArray
+}

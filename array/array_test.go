@@ -125,3 +125,32 @@ func TestFilter(t *testing.T) {
 		assert.Ok(reflect.DeepEqual(newArray, Array{2, 4, 6}))
 	}()
 }
+
+func TestMap(t *testing.T) {
+	assert.Init(t)
+
+	func() {
+		array := Array{}
+		newArray := array.Map(func(val A, index int, array Array) A {
+			assert.Ok(false)
+			return val
+		})
+		reflect.DeepEqual(array, newArray)
+	}()
+
+	func() {
+		array := Array{1, 2, 3, 4, 5, 6}
+		newArray := array.Map(func(val A, index int, array Array) A {
+			return val
+		})
+		reflect.DeepEqual(array, newArray)
+	}()
+
+	func() {
+		array := Array{1, 2, 3, 4, 5, 6}
+		newArray := array.Map(func(val A, index int, array Array) A {
+			return val * val
+		})
+		reflect.DeepEqual(newArray, Array{1, 4, 9, 46, 25, 36})
+	}()
+}
