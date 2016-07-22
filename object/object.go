@@ -9,14 +9,6 @@ type SecondArray []Second
 //Object has js-like functions
 type Object map[First]Second
 
-/********Self defination Begin*******************/
-
-func (obj Object) Less(i, j First) bool {
-	return obj[i] < obj[j]
-}
-
-/********Self defination End*******************/
-
 /*
 Keys return array of keys of the Obecjt
 */

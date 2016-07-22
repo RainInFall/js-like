@@ -6,6 +6,10 @@ import (
 	"github.com/RainInFall/assert"
 )
 
+func (obj Object) Less(i, j First) bool {
+	return obj[i] < obj[j]
+}
+
 func TestKeys(t *testing.T) {
 	assert.Init(t)
 
