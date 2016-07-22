@@ -8,6 +8,7 @@ install:
   - go get github.com/RainInFall/assert
   - go get golang.org/x/tools/cmd/cover
   - go get github.com/mattn/goveralls
+  - go get github.com/ncw/gotemplate
   - go get github.com/RainInFall/js-like
 
 before_script:
