@@ -91,3 +91,37 @@ func TestSome(t *testing.T) {
 		}
 	}()
 }
+
+func TestFilter(t *testing.T) {
+	assert.Init(t)
+
+	func() {
+		array := Array{}
+		newArray := array.Filter(func(val A, index int, array Array) bool {
+			t.Fail()
+			return false
+		})
+		assert.Ok(nil != newArray)
+		assert.Ok(newArray.Len() == 0 && len(newArray) == 0)
+		assert.Ok(reflect.TypeOf(array) == reflect.TypeOf(newArray))
+	}()
+
+	func() {
+		array := Array{1, 2, 3, 4, 5, 6}
+		newArray := array.Filter(func(val A, index int, array Array) bool {
+			return false
+		})
+		assert.Ok(nil != newArray)
+		assert.Ok(newArray.Len() == 0 && len(newArray) == 0)
+		assert.Ok(reflect.TypeOf(array) == reflect.TypeOf(newArray))
+	}()
+
+	func() {
+		array := Array{1, 2, 3, 4, 5, 6}
+		newArray := array.Filter(func(val A, index int, array Array) bool {
+			return 0 == val%2
+		})
+
+		assert.Ok(reflect.DeepEqual(newArray, Array{2, 4, 6}))
+	}()
+}

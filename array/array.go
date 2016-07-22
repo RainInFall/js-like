@@ -40,3 +40,16 @@ func (array Array) Sort() Array {
 	sort.Sort(array)
 	return array
 }
+
+/*
+Filter the Array according to the result of the func
+*/
+func (array Array) Filter(callback func(val A, index int, array Array) bool) Array {
+	newArray := Array{}
+	for index, val := range array {
+		if callback(val, index, array) {
+			newArray = append(newArray, val)
+		}
+	}
+	return newArray
+}
