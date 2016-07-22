@@ -135,7 +135,7 @@ func TestMap(t *testing.T) {
 			assert.Ok(false)
 			return val
 		})
-		reflect.DeepEqual(array, newArray)
+		assert.Ok(reflect.DeepEqual(array, newArray))
 	}()
 
 	func() {
@@ -143,7 +143,7 @@ func TestMap(t *testing.T) {
 		newArray := array.Map(func(val A, index int, array Array) A {
 			return val
 		})
-		reflect.DeepEqual(array, newArray)
+		assert.Ok(reflect.DeepEqual(array, newArray))
 	}()
 
 	func() {
@@ -151,6 +151,6 @@ func TestMap(t *testing.T) {
 		newArray := array.Map(func(val A, index int, array Array) A {
 			return val * val
 		})
-		reflect.DeepEqual(newArray, Array{1, 4, 9, 46, 25, 36})
+		assert.Ok(reflect.DeepEqual(newArray, Array{1, 4, 9, 16, 25, 36}))
 	}()
 }

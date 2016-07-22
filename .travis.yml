@@ -17,9 +17,11 @@ before_script:
 script: 
   - go test -v -covermode=count -coverprofile=test.out ./test
   - go test -v -covermode=count -coverprofile=array.out ./array
+  - go test -v -covermode=count -coverprofile=array2.out ./array2
   - go test -v -covermode=count -coverprofile=object.out ./object
 after_script:
   - mv test.out cover.out
   - sed "1d" object.out >> cover.out
   - sed "1d" array.out >> cover.out
+  - sed "1d" array2.out >> cover.out
   - $HOME/gopath/bin/goveralls -ignore=gotemplate_*.go,test/* -coverprofile=cover.out -service=travis-ci -repotoken $COVERALLS_TOKEN
