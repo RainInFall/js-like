@@ -1,2 +1,5 @@
 *.test
 *.out
+
+#gotemplate
+gotemplate_*.go
