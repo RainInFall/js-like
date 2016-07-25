@@ -30,6 +30,29 @@ func gotemplate(pkg, params string) error {
 	return nil
 }
 
+func arrayName(typeName string) string {
+	return "Array" + escapeName(typeName)
+}
+
+func escapeName(typeName string) string {
+	if '*' == typeName[0] {
+		return strings.Replace(typeName, "*", "p", 1)
+	}
+	return typeName
+}
+
+func generateArray(args []string) {
+	if len(args) != 1 {
+		log.Fatal("Syntax: array type")
+		os.Exit(2)
+	}
+	typeOrigin := args[0]
+
+	if err := gotemplate("github.com/RainInFall/js-like/array", fmt.Sprintf("%s(%s)", arrayName(typeOrigin), typeOrigin)); nil != err {
+		os.Exit(3)
+	}
+}
+
 func main() {
 	flag.Usage = usage
 	flag.Parse()
@@ -44,16 +67,22 @@ func main() {
 	switch templateName {
 	case "array":
 		{
-			if len(args) != 1 {
-				log.Fatal("Syntax: array type")
+			generateArray(args)
+		}
+	case "array2":
+		{
+			if len(args) != 2 {
+				log.Fatal("Syntax: array2 typeA typeB")
 				os.Exit(2)
 			}
-			typeOrigin := args[0]
-			typeName := typeOrigin
-			if '*' == typeName[0] {
-				typeName = strings.Replace(typeName, "*", "p", 1)
-			}
-			if err := gotemplate("github.com/RainInFall/js-like/array", fmt.Sprintf("Array%s(%s)", typeName, typeOrigin)); nil != err {
+			typeA := args[0]
+			typeB := args[1]
+			generateArray(args[0:1])
+			generateArray(args[1:2])
+			if err := gotemplate(
+				"github.com/RainInFall/js-like/array2",
+				fmt.Sprintf("%s(%s,%s,%s,%s)",
+					escapeName(typeB), typeA, typeB, arrayName(typeA), arrayName(typeB))); nil != err {
 				os.Exit(3)
 			}
 		}
@@ -66,17 +95,13 @@ func main() {
 
 			keyType := args[0]
 			valueType := args[1]
-			arrayKeyType := fmt.Sprintf("Array%s", keyType)
-			arrayValueType := fmt.Sprintf("Array%s", valueType)
 
-			if err := gotemplate("github.com/RainInFall/js-like/array", fmt.Sprintf("%s(%s)", arrayKeyType, keyType)); nil != err {
-				os.Exit(3)
-			}
-			if err := gotemplate("github.com/RainInFall/js-like/array", fmt.Sprintf("%s(%s)", arrayValueType, valueType)); nil != err {
-				os.Exit(3)
-			}
-			if err := gotemplate("github.com/RainInFall/js-like/object",
-				fmt.Sprintf("Object%s%s(%s,%s,%s,%s)", keyType, valueType, keyType, valueType, arrayKeyType, arrayValueType)); nil != err {
+			generateArray(args[0:1])
+			generateArray(args[1:2])
+			if err := gotemplate(
+				"github.com/RainInFall/js-like/object",
+				fmt.Sprintf("Object%s%s(%s,%s,%s,%s)",
+					escapeName(keyType), escapeName(valueType), keyType, valueType, arrayName(keyType), arrayName(valueType))); nil != err {
 				os.Exit(3)
 			}
 		}
