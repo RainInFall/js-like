@@ -17,9 +17,9 @@ func usage() {
 	os.Exit(1)
 }
 
-func gotemplate(pkg, params string) error {
+func gotemplate(params ...string) error {
 	gopath := os.Getenv("GOPATH")
-	cmd := exec.Command(gopath+"/bin/gotemplate", pkg, params)
+	cmd := exec.Command(gopath+"/bin/gotemplate", params...)
 	output, err := cmd.CombinedOutput()
 	if nil != err {
 		log.Printf("%s\r\n", output)
@@ -80,9 +80,10 @@ func main() {
 			generateArray(args[0:1])
 			generateArray(args[1:2])
 			if err := gotemplate(
+				"-r", fmt.Sprintf("D=%s", escapeName(typeB)),
 				"github.com/RainInFall/js-like/array2",
 				fmt.Sprintf("%s(%s,%s,%s,%s)",
-					escapeName(typeB), typeA, typeB, arrayName(typeA), arrayName(typeB))); nil != err {
+					"array"+escapeName(typeA)+escapeName(typeB), typeA, typeB, arrayName(typeA), arrayName(typeB))); nil != err {
 				os.Exit(3)
 			}
 		}

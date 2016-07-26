@@ -154,3 +154,24 @@ func TestMap(t *testing.T) {
 		assert.Ok(reflect.DeepEqual(newArray, Array{1, 4, 9, 16, 25, 36}))
 	}()
 }
+
+func TestIndexOf(t *testing.T) {
+	assert.Init(t)
+
+	func() {
+		array := Array{}
+		assert.Ok(-1 == array.IndexOf(0))
+	}()
+
+	func() {
+		array := Array{0, 1, 2, 3, 4, 5, 6}
+		for i, v := range array {
+			assert.Ok(i == array.IndexOf(v))
+		}
+	}()
+
+	func() {
+		array := Array{0, 1, 2, 3, 4, 5, 6}
+		assert.Ok(-1 == array.IndexOf(7))
+	}()
+}

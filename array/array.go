@@ -13,7 +13,7 @@ type Array []A
 /*
 Some tests whether some element in the array passes the test implemented by the provided function
 */
-func (array Array) Some_CC_(f func(A, int, Array) bool) bool {
+func (array Array) Some(f func(A, int, Array) bool) bool {
 	for index, value := range array {
 		if f(value, index, array) {
 			return true
@@ -65,6 +65,14 @@ func (array Array) Map(callback func(val A, index int, array Array) A) Array {
 	return newArray
 }
 
-func Go() bool {
-	return true
+/*
+IndexOf return first index of the value
+*/
+func (array Array) IndexOf(value A) int {
+	for i, v := range array {
+		if value == v {
+			return i
+		}
+	}
+	return -1
 }
